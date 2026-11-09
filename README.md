@@ -11,7 +11,7 @@ A simple self-hosted file transfer tool. Upload a file, get a short code, share 
 - File manager — view, copy link, delete
 - Works over local network or Tailscale
 - Installable as a PWA on mobile
-- Up to 500MB per file
+- No app-imposed file size limit (limited by available server disk space)
 
 ## Requirements
 
@@ -75,5 +75,6 @@ file-transfer/
 ## Notes
 
 - Uploaded files are stored in `uploads/` on disk
+- Uploads stream directly to disk and have no server request duration limit; any reverse proxy must also allow large, long-running uploads
 - The file registry is in-memory — restarting the server clears the list but not the files on disk
 - No authentication — intended for personal/local use only

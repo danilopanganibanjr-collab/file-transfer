@@ -1,4 +1,4 @@
-const CACHE = 'transfer-v1';
+const CACHE = 'transfer-v2';
 const SHELL = ['/', '/manifest.json'];
 
 // Install: cache the app shell

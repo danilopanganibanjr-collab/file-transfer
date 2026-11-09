@@ -26,10 +26,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({
-  storage,
-  limits: { fileSize: 500 * 1024 * 1024 } // 500MB limit
-});
+const upload = multer({ storage });
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -90,7 +87,7 @@ app.delete('/api/files/:id', (req, res) => {
   res.json({ success: true });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   const { networkInterfaces } = require('os');
   const nets = networkInterfaces();
   const addresses = [];
@@ -110,3 +107,6 @@ app.listen(PORT, '0.0.0.0', () => {
   });
   console.log('');
 });
+
+// Large uploads over slow connections can take longer than Node's default timeout.
+server.requestTimeout = 0;
